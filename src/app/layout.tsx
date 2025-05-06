@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 // Google Font Setup
 const geistSans = Geist({
@@ -17,6 +18,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Xolar Solution Sdn Bhd | Savings From Day 1",
   description: "Xolar Solution Sdn Bhd - Contact Page",
+  openGraph: {
+    title: "Xolar Solution Sdn Bhd | Savings From Day 1",
+    description:
+      "Find out how Xolar can help you save from day 1 with our innovative solar solutions.",
+    images: ["/xolar-logo-og.png"],
+    url: "https://xolar.my",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Xolar Solution Sdn Bhd | Savings From Day 1",
+    description:
+      "Find out how Xolar can help you save from day 1 with our innovative solar solutions.",
+    images: ["/xolar-logo-og.png"],
+  },
 };
 
 export default function RootLayout({
@@ -27,55 +43,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* SEO Metadata */}
-        <title>Xolar Solution Sdn Bhd | Savings From Day 1</title>
-        <meta
-          name="description"
-          content="Xolar Solution Sdn Bhd - Contact Page"
-        />
-        {/* Open Graph Metadata */}
-        <meta
-          property="og:title"
-          content="Xolar Solution Sdn Bhd | Savings From Day 1"
-        />
-        <meta
-          property="og:description"
-          content="Find out how Xolar can help you save from day 1 with our innovative solar solutions."
-        />
-        <meta property="og:image" content="/xolar-logo-og.png" />{" "}
-        {/* Update with the correct image path */}
-        <meta property="og:url" content="https://xolar.my" />{" "}
-        {/* Update with your website URL */}
-        <meta property="og:type" content="website" />
-        {/* Twitter Card Metadata */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Xolar Solution Sdn Bhd | Savings From Day 1"
-        />
-        <meta
-          name="twitter:description"
-          content="Find out how Xolar can help you save from day 1 with our innovative solar solutions."
-        />
-        <meta name="twitter:image" content="/xolar-logo-og.png" />{" "}
-        {/* Update with the correct image path */}
-        {/* Google Analytics Script */}
-        <script
+        {/* <Script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=G-37DETFC81Y`} // Replace with your GA ID
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-37DETFC81Y'); // Replace with your GA ID
-            `,
-          }}
-        ></script>
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-5S7RBCBM"
+        ></Script>
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-37DETFC81Y`}
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-37DETFC81Y');
+          `}
+        </Script> */}
         {/* Facebook Pixel Script */}
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -88,16 +73,16 @@ export default function RootLayout({
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '1320897905761892'); // Replace with your Pixel ID
               fbq('track', 'PageView');
-              fbq('trackCustom', 'namecard')
             `,
           }}
-        ></script>
+        ></script> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
+      <GoogleTagManager gtmId="GTM-5S7RBCBM" />
     </html>
   );
 }

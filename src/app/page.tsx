@@ -15,57 +15,27 @@ import {
 import { CgWebsite } from "react-icons/cg";
 import { FaWhatsapp } from "react-icons/fa"; // Additional icons for WhatsApp and contacts
 import { TbBrandGoogle } from "react-icons/tb";
+import { SALESMAN_DATA, SalesmanKey } from "./constants";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 const MainContent: React.FC = () => {
-  type SalesmanKey = "eric" | "kong" | "mandy" | "alex" | "wang";
-
-  const [salesmanInfo, setSalesmanInfo] = useState<{
-    fullName: string | null;
-    phoneNumber: string | null;
-    email: string | null;
-  }>({
-    fullName: "Xolar Office Team",
-    phoneNumber: "+60387279000",
-    email: "info@xolar.my",
-  });
+  const [salesmanInfo, setSalesmanInfo] = useState(SALESMAN_DATA["default"]); // Initialize with default
+  const [promoInfo, setPromoInfo] = useState("None");
 
   const searchParams = useSearchParams();
 
-  // Define the salesman data with specific keys
-  const salesmanData: Record<
-    SalesmanKey,
-    {
-      fullName: string;
-      phoneNumber: string;
-      email: string;
+  useEffect(() => {
+    const salesmanNameParam = searchParams.get("namecard");
+    const promoNameParam = searchParams.get("promo");
+    let selectedSalesman = SALESMAN_DATA["default"]; // Default salesman
+
+    if (salesmanNameParam && SALESMAN_DATA[salesmanNameParam as SalesmanKey]) {
+      // Use type assertion
+      selectedSalesman = SALESMAN_DATA[salesmanNameParam as SalesmanKey]; // Use type assertion
     }
-  > = {
-    eric: {
-      fullName: "Eric Tan",
-      phoneNumber: "+60123198926",
-      email: "eric@xolar.my",
-    },
-    kong: {
-      fullName: "YF Kong",
-      phoneNumber: "+60192190588",
-      email: "kong@xolar.my",
-    },
-    mandy: {
-      fullName: "Mandy Soo",
-      phoneNumber: "+60123818355",
-      email: "mandy@xolar.my",
-    },
-    alex: {
-      fullName: "Alex",
-      phoneNumber: "+60125535999",
-      email: "alex@xolar.my",
-    },
-    wang: {
-      fullName: "Wang",
-      phoneNumber: "+60126675220",
-      email: "wang@xolar.my",
-    },
-  };
+    setSalesmanInfo(selectedSalesman);
+    setPromoInfo(promoNameParam || "None");
+  }, [searchParams]);
 
   const trackLinkClick = (
     category: string = "Button",
@@ -82,41 +52,52 @@ const MainContent: React.FC = () => {
       device_type: /mobile/i.test(navigator.userAgent) ? "mobile" : "desktop",
     };
 
-    // Google Analytics Event Tracking
-    if (window.gtag) {
-      window.gtag("event", "click", data);
-    }
+    sendGTMEvent({ event: "click", ...data });
+    // // Google Analytics Event Tracking
+    // if (window.gtag) {
+    //   window.gtag("event", "click", data);
+    // }
 
-    // Facebook Pixel Event Tracking
-    if (window.fbq) {
-      window.fbq("trackCustom", "LinkClick", data);
-    }
+    // // Facebook Pixel Event Tracking
+    // if (window.fbq) {
+    //   window.fbq("trackCustom", "LinkClick", data);
+    // }
   };
 
   useEffect(() => {
-    const salesmanNameParam = searchParams.get("namecard");
-    console.log("salesman");
-    if (salesmanNameParam && salesmanData[salesmanNameParam as SalesmanKey]) {
-      setSalesmanInfo(salesmanData[salesmanNameParam as SalesmanKey]);
-    }
-  }, [searchParams]);
-
-  useEffect(() => {
     if (salesmanInfo.fullName) {
-      if (window.gtag) {
-        window.gtag("event", "namecard", {
+      sendGTMEvent({
+        event: "namecard",
+        value: {
           salesman_name: salesmanInfo.fullName,
           page_path: window.location.pathname,
-        });
-      }
+        },
+      });
+      // if (window.gtag) {
+      //   window.gtag("event", "namecard", {
+      //     salesman_name: salesmanInfo.fullName,
+      //     page_path: window.location.pathname,
+      //   });
+      // }
 
-      if (window.fbq) {
-        window.fbq("trackCustom", "namecard", {
-          salesman_name: salesmanInfo.fullName,
-        });
-      }
+      // if (window.fbq) {
+      //   window.fbq("trackCustom", "namecard", {
+      //     salesman_name: salesmanInfo.fullName,
+      //   });
+      // }
     }
   }, [salesmanInfo]);
+
+  useEffect(() => {
+    if (promoInfo) {
+      sendGTMEvent({
+        event: "promo",
+        value: {
+          promo_name: promoInfo,
+        },
+      });
+    }
+  }, [promoInfo]);
 
   const links = [
     {
@@ -183,6 +164,20 @@ END:VCARD`;
     URL.revokeObjectURL(url);
   };
 
+  const handleWhatsAppClick = () => {
+    trackLinkClick("Contact Button", "Whatsapp Button");
+
+    const message = `Hi ${salesmanInfo.fullName}, I want to know more about solar system installation.`;
+    const encodedMessage = encodeURIComponent(message);
+
+    const whatsappUrl = `https://wa.me/${salesmanInfo.phoneNumber?.replace(
+      /\+/,
+      ""
+    )}?text=${encodedMessage}`;
+
+    window.location.href = whatsappUrl;
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white p-6">
       {/* Logo Section */}
@@ -195,7 +190,15 @@ END:VCARD`;
           className="w-80 object-contain"
         />
       </div>
-
+      {promoInfo === "UOB_EVENT" ? (
+        <span className="text-blue-600">
+          🎉 Special UOB Event Promo – Enjoy Exclusive Solar Deals!
+        </span>
+      ) : (
+        <span className="text-gray-700">
+          ☀️ Welcome! Contact us to learn more about solar solutions.
+        </span>
+      )}
       {/* Salesman Info */}
       {salesmanInfo.fullName && (
         <p className="text-4xl font-bold mb-4 text-gray-800 text-center">
@@ -221,13 +224,7 @@ END:VCARD`;
         </button>
 
         <button
-          onClick={() => {
-            window.location.href = `https://wa.me/${salesmanInfo.phoneNumber?.replace(
-              /\+/,
-              ""
-            )}`;
-            trackLinkClick("Contact Button", "Whatsapp Button");
-          }}
+          onClick={handleWhatsAppClick}
           className="flex items-center justify-between w-full bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 transition"
           aria-label={`Chat with me on WhatsApp`}
         >
