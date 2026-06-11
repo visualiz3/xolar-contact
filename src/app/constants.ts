@@ -31,6 +31,31 @@ export const SALESMAN_DATA = {
     phoneNumber: "+60133337722",
     email: "wang@xolar.my",
   },
+  looi: {
+    fullName: "Looi",
+    phoneNumber: "+60133337722",
+    email: "looi@xolar.my",
+  },
+  yingshi: {
+    fullName: "Ying Shi",
+    phoneNumber: "+60133337722",
+    email: "yingshi@xolar.my",
+  },
+  danny: {
+    fullName: "Danny",
+    phoneNumber: "+60133337722",
+    email: "danny@xolar.my",
+  },
+  wilson: {
+    fullName: "Wilson",
+    phoneNumber: "+60133337722",
+    email: "wilson@xolar.my",
+  },
+  yixin: {
+    fullName: "Yi Xin",
+    phoneNumber: "+60133337722",
+    email: "kongyx@xolar.my",
+  },
   default: {
     // Added default salesman
     fullName: "Xolar Office Team",

@@ -11,6 +11,7 @@ import {
   FaPhoneAlt,
   FaAddressBook,
   FaWaze,
+  FaEnvelope,
 } from "react-icons/fa";
 import { CgWebsite } from "react-icons/cg";
 import { FaWhatsapp } from "react-icons/fa";
@@ -260,6 +261,18 @@ const ContactActions: React.FC<ContactActionsProps> = ({ salesmanInfo }) => {
         <span className="text-center flex-1">
           Call Me {salesmanInfo.phoneNumber}
         </span>
+      </button>
+
+      <button
+        onClick={() => {
+          trackLinkClick("Contact Button", "Email Button");
+          window.location.href = `mailto:${salesmanInfo.email}`;
+        }}
+        className="flex items-center justify-between w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-700 transition"
+        aria-label={`Email me at ${salesmanInfo.email}`}
+      >
+        <FaEnvelope className="mr-3" size={20} />
+        <span className="text-center flex-1">Email Me : {salesmanInfo.email}</span>
       </button>
 
       <button
