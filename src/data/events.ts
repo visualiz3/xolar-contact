@@ -12,8 +12,8 @@ export interface EventConfig {
 }
 
 export const EVENT_DATA: Record<string, EventConfig> = {
-  "banner-vr-01": {
-    slug: "banner-vr-01",
+  "banner-vr-02": {
+    slug: "banner-vr-02",
     title: "SuriaHome RM3000 Rebate",
     heroHeadline: "Claim Your RM 3,000 Government Solar Rebate",
     heroSubheadline: "Switch to solar with Xolar today and let us secure your SuriaHome rebate before the quota runs out.",
