@@ -31,6 +31,8 @@ export const EventHero: React.FC<EventHeroProps> = ({
           alt="Background"
           fill
           priority
+          quality={50}
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/80" />
@@ -49,6 +51,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
             alt="Xolar Logo"
             width={200}
             height={60}
+            priority
             className="object-contain"
           />
         </motion.div>
