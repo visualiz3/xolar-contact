@@ -14,24 +14,24 @@ export interface EventConfig {
 export const EVENT_DATA: Record<string, EventConfig> = {
   "banner-vr-02": {
     slug: "banner-vr-02",
-    title: "SuriaHome RM3000 Rebate",
-    heroHeadline: "Claim Your RM 3,000 Government Solar Rebate",
-    heroSubheadline: "Switch to solar with Xolar today and let us secure your SuriaHome rebate before the quota runs out.",
+    title: "SuriaHome RM3000 + RM1000 Rebate",
+    heroHeadline: "Claim RM 3,000 + RM 1,000 Total Solar Discount, Limited time offer.",
+    heroSubheadline: "",
     benefits: [
       {
-        title: "Instant RM 3,000 Rebate",
-        description: "Subsidized directly by the government through the SuriaHome initiative."
+        title: "RM 4,000 Instant Savings",
+        description: "Combine the government rebate with our exclusive discount to save RM 4,000 upfront."
       },
       {
-        title: "Zero Upfront Cost Options",
-        description: "Flexible installment plans available to ensure your savings start from Day 1."
+        title: "$0 Upfront Payment",
+        description: "Start saving on your electricity bills from Day 1 without paying anything upfront."
       },
       {
-        title: "Hassle-Free Application",
-        description: "Our experts will handle 100% of the paperwork and quota applications for you."
+        title: "We Handle Everything",
+        description: "From government rebate applications to installation, we do it all for you."
       }
     ],
-    ctaText: "Claim RM 3,000 Solar Rebate",
+    ctaText: "Claim RM 3,000 + RM 1,000 (KLIMS) Discount",
     primaryColor: "bg-blue-600"
   },
 };

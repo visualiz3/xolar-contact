@@ -24,9 +24,17 @@ export const EventHero: React.FC<EventHeroProps> = ({
   ctaText 
 }) => {
   return (
-    <section className="relative w-full min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-black text-white px-6">
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white px-6">
       <div className="absolute inset-0 z-0">
-        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] opacity-30 blur-[120px] rounded-full pointer-events-none ${primaryColor}`} />
+        <Image
+          src="/bg.jpeg"
+          alt="Background"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/80" />
+        <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] opacity-40 blur-[120px] rounded-full pointer-events-none ${primaryColor}`} />
       </div>
       
       <div className="z-10 text-center max-w-4xl mx-auto flex flex-col items-center space-y-8 mt-12">
@@ -34,13 +42,13 @@ export const EventHero: React.FC<EventHeroProps> = ({
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-4"
+          className="mb-6 p-4 px-8 bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20"
         >
           <Image
             src="/xolar-logo-transparent.png"
             alt="Xolar Logo"
-            width={240}
-            height={80}
+            width={200}
+            height={60}
             className="object-contain"
           />
         </motion.div>
@@ -74,7 +82,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
           >
             <Button
               size="lg"
-              className={`w-full text-lg h-14 rounded-full ${primaryColor} hover:opacity-90 transition-opacity`}
+              className={`w-full text-base md:text-lg min-h-14 h-auto py-3 rounded-full whitespace-normal break-words leading-tight ${primaryColor} hover:opacity-90 transition-opacity`}
               onClick={() => 
                 handleWhatsAppClick({ 
                   ...salesmanInfo, 
@@ -82,12 +90,12 @@ export const EventHero: React.FC<EventHeroProps> = ({
                 })
               }
             >
-              <FaWhatsapp className="mr-3 w-6 h-6" />
-              {ctaText}
+              <FaWhatsapp className="mr-2 md:mr-3 w-5 h-5 md:w-6 md:h-6 shrink-0" />
+              <span className="text-center">{ctaText}</span>
             </Button>
-            <p className="mt-4 text-sm text-neutral-400 font-medium">
-              Chat directly with {salesmanInfo.fullName || "our team"}
-            </p>
+            {/* <p className="mt-4 text-sm text-neutral-400 font-medium">
+              WhatsApp directly with {salesmanInfo.fullName || "our team"} to claim
+            </p> */}
           </motion.div>
         )}
       </div>

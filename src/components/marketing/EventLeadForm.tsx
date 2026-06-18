@@ -28,11 +28,11 @@ export const EventLeadForm: React.FC<EventLeadFormProps> = ({ ctaText, salesmanI
           <div className="flex flex-col space-y-4 pt-4">
             <Button
               size="lg"
-              className={`w-full text-lg h-14 rounded-full ${primaryColor} hover:opacity-90 transition-opacity`}
+              className={`w-full text-base md:text-lg min-h-14 h-auto py-3 rounded-full whitespace-normal break-words leading-tight ${primaryColor} hover:opacity-90 transition-opacity`}
               onClick={() => handleWhatsAppClick({ ...salesmanInfo, message: `I am interested in the ${ctaText} offer!` })}
             >
-              <FaWhatsapp className="mr-3 w-6 h-6" />
-              {ctaText}
+              <FaWhatsapp className="mr-2 md:mr-3 w-5 h-5 md:w-6 md:h-6 shrink-0" />
+              <span className="text-left">{ctaText}</span>
             </Button>
             
             <div className="grid grid-cols-1 gap-4">
