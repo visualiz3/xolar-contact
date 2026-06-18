@@ -24,7 +24,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
   ctaText 
 }) => {
   return (
-    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white px-6">
+    <section className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-black text-white px-6 py-8">
       <div className="absolute inset-0 z-0">
         <Image
           src="/bg.jpeg"
@@ -39,18 +39,18 @@ export const EventHero: React.FC<EventHeroProps> = ({
         <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] opacity-40 blur-[120px] rounded-full pointer-events-none ${primaryColor}`} />
       </div>
       
-      <div className="z-10 text-center max-w-4xl mx-auto flex flex-col items-center space-y-8 mt-12">
+      <div className="z-10 text-center max-w-4xl mx-auto flex flex-col items-center justify-center space-y-4 md:space-y-8 w-full">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-6 p-4 px-8 bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20"
+          className="mb-2 md:mb-6 p-3 px-6 md:p-4 md:px-8 bg-white/90 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20"
         >
           <Image
             src="/xolar-logo-transparent.png"
             alt="Xolar Logo"
-            width={200}
-            height={60}
+            width={180}
+            height={50}
             priority
             className="object-contain"
           />
@@ -61,7 +61,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-neutral-400">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight leading-snug md:leading-tight bg-clip-text text-transparent bg-gradient-to-br from-white to-neutral-400">
             {headline}
           </h1>
         </motion.div>
@@ -81,7 +81,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="w-full max-w-sm pt-6"
+            className="w-full max-w-sm pt-2 md:pt-6"
           >
             <Button
               size="lg"
